@@ -1,0 +1,6 @@
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE sandpile)
+target_link_libraries(${PROJECT_NAME} PRIVATE ArgParser)
+target_link_libraries(${PROJECT_NAME} PRIVATE BoolValues)
+target_link_libraries(${PROJECT_NAME} PRIVATE IntValues)
+target_link_libraries(${PROJECT_NAME} PRIVATE StringValues)
