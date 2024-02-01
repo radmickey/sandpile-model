@@ -1,58 +1,58 @@
-# Модель Песчаной кучи
+## Sand pile model
 
-## Введение 
+## Introduction 
 
-[Модель песчаной кучи](https://en.wikipedia.org/wiki/Abelian_sandpile_model), консольное приложение, позволяющее сохранять свои состояния в картинку в формате BMP. 
+[Sand Heap Model](https://en.wikipedia.org/wiki/Abelian_sandpile_model), a console application that allows you to save your states into a BMP image. 
 
-Изначальное состояние и размер сетки задается.
+The initial state and grid size are specified.
 
-Размер сетки может изменяться в процессе
+The grid size can be changed during the process
 
-Реализация - консольное приложение, поддерживающее следующие аргументы командной строки:
+Implementation, a console application that supports the following command line arguments:
 
-  **-l, --length** - длина сетки (гарантированно влезет в uint16_t)
+  **-l, --length** - grid length (guaranteed to fit in uint16_t)
   
-  **-w, --width** - ширина сетки (гарантированно влезет в uint16_t)
+  **-w, --width** - grid width (guaranteed to fit into uint16_t)
   
-  **-i, --input** - tsv-файл c начальными данными
+  **-i, --input** - tsv-file with initial data
   
-  **-o, --output** - путь к директории, для сохранения картинок
+  **-o, --output** - path to the directory for saving pictures
   
-  **-m, --max-iter** - максимальное количество итераций модели
+  **-m, --max-iter** - maximum number of model iterations
   
-  **-f, --freq** - частота с которой должны сохранятся картинки (если 0, то сохраняется только последнее состояние)
+  **-f, --freq** - frequency at which the pictures should be saved (if 0, only the last state is saved).
   
-Порядок ввода аргументов не имеет значения
+The order of arguments does not matter
 
 
-## Начальное состояние
+## Initial state
 
-Начальное состояние задается размерами сетки, переданными в качестве аргументов программы и файлом с изначальным количеством песчинок в каждой ячейке, кроме пустых.
+The initial state is specified by the grid sizes passed as program arguments and a file with the initial number of grains of sand in each cell, except for empty ones.
 
-Формат файла:
-Каждая строчка содержит информацию об одной ячейке, в виде (x-координаты, y-координаты, количестве песчинок), разделенных символом табуляции. Количество песчинок гарантированно влезет в uint64_t. 
+File format:
+Each line contains information about one cell, in the form of (x-coordinates, y-coordinates, number of grains of sand) separated by a tab character. The number of grains of sand is guaranteed to fit in uint64_t. 
 
-## Примечания к модели
+## Notes on the model
 
-1. Новые песчинки добавляются только при инициализации.
+1. New grains of sand are added only during initialization.
 
-2. Состояние след поколения ячейки зависит только от предыдущего состояния сетки
+2. The state of the trace generation of a cell depends only on the previous state of the mesh
 
-3. В случае если песчинки обваливаются за сетку, размер сетки увеличивается на 1 в соответсвующую стороны
+3. If grains of sand fall over the grid, the size of the grid is increased by 1 in the corresponding direction.
 
-## Результат работы программы
+## Program result
 
-Программа пересчитывает состояние модели, согласно начальным данным, а также сохраняет промежуточные состояния с заданной частотой в картинку в формате bmp.
+The program recalculates the state of the model, according to the initial data, and also saves intermediate states with a specified frequency into a picture in bmp format.
 
-Картинка для текущего состояния формируется по след правилам:
+The picture for the current state is formed according to the following rules:
 
-1. Размер картинки равен размеру поля
+1. The size of the picture is equal to the size of the field
 
-2. Каждый пиксель соответствует ячейке поля
+2. Each pixel corresponds to a cell of the field
 
-3. Цвет пикселя зависит от количества песчинок в ячейке: 0 - белый, 1 - зеленый, 2 - фиолетовый, 3 - желтый, > 3 - черный.
+3. The color of a pixel depends on the number of grains of sand in the cell: 0 - white, 1 - green, 2 - purple, 3 - yellow, > 3 - black.
 
-Программа заканчивает свою работу в случае, если модель достигла стабильного состояния, либо номера итерации заданного изначально.
+The program terminates if the model has reached a stable state or the iteration number set initially.
 
-## Пример ввода 
+## Input example 
 1. -l=100 -w=100 -i=someName.tsv -o=./
